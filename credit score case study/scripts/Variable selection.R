@@ -62,7 +62,7 @@ contrasts(training.data.raw$Embarked)
 
 # CONCLUSION: Discard variables based on missing values, and drop the ID - remove rows with missings in Embarked (only 2)
 data <- training.data.raw %>%
-  select(-c(Cabin, PassengerId, Ticket)) %>%
+  select(-c(Cabin, PassengerId, Ticket, Name)) %>%
   filter(!is.na(Embarked))
 
 ## Outliers
@@ -130,3 +130,6 @@ cor(data %>% select_if(is.numeric))
 # https://cran.r-project.org/web/packages/penalized/vignettes/penalized.pdf
 
 # write final data set to processed folder
+write.csv2(data, 
+           here("data/processed/", "training_set_cleaned.csv"), 
+           row.names = FALSE)
